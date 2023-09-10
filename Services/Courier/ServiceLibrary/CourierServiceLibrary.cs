@@ -1,9 +1,16 @@
+using CourierServiceDotnet.Services.Courier.Domain;
 using CourierServiceDotnet.Services.Courier.ServiceLibrary.DTO;
 
 namespace CourierServiceDotnet.Services.Courier.ServiceLibrary
 {
     public class CourierServiceLibrary : ICourierServiceLibrary
     {
+        private readonly ICourierService _courierService;
+
+        public CourierServiceLibrary(ICourierService courierService)
+        {
+            _courierService = courierService;
+        }
         public async Task<IEnumerable<CourierDTO>> GetCouriers()
         {
             var result = new List<CourierDTO>() { new CourierDTO(1, 30) };

@@ -1,12 +1,19 @@
 using CourierServiceDotnet.Services.Courier.Domain.Entities;
+using CourierServiceDotnet.Services.Courier.Domain.InfrastructureContracts;
 
 namespace CourierServiceDotnet.Services.Courier.Domain
 {
     public class CourierService : ICourierService
     {
-        public Task<IEnumerable<CourierEntity>> GetCouriers()
+        private readonly ICourierRepository _courierRepository;
+        public CourierService(ICourierRepository courierRepository)
         {
-            throw new NotImplementedException();
+            _courierRepository = courierRepository;
+        }
+        public async Task<IEnumerable<CourierEntity>> GetCouriers()
+        {
+            var result = await _courierRepository.GetCouriers();
+            return result;
         }
     }
 

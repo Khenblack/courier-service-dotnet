@@ -22,7 +22,7 @@ namespace CourierServiceDotnet.DBContext
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasDefaultSchema("TutorialAppSchema");
+            modelBuilder.HasDefaultSchema("CouriersSchema");
             modelBuilder.Entity<CourierDB>();
             // .HasBaseType<User>();
         }

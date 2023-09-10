@@ -4,7 +4,7 @@ namespace CourierServiceDotnet.Services.Courier.Domain.InfrastructureContracts
 {
     public interface ICourierRepository
     {
-        public Task<IEnumerable<CourierEntity>> GetCouriers();
+        public Task<List<CourierEntity>> GetCouriers();
     }
 
 }

@@ -19,6 +19,10 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.10" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.1" />
     <PackageReference Include="Microsoft.Entityframeworkcore" Version="7.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.10">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.10" />
     <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="7.0.10" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />

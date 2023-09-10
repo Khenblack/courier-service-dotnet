@@ -12,7 +12,7 @@ namespace CourierServiceDotnet.Services.Courier.Infrastructure
         {
         }
 
-        public async Task<IEnumerable<CourierEntity>> GetCouriers()
+        public async Task<List<CourierEntity>> GetCouriers()
         {
             var result = await GetAll();
             var resultMapped = EntityMapper.Map(result);
