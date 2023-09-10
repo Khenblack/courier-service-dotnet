@@ -10,7 +10,7 @@ namespace CourierServiceDotnet.Services.Courier.Domain
         {
             _courierRepository = courierRepository;
         }
-        public async Task<IEnumerable<CourierEntity>> GetCouriers()
+        public async Task<List<CourierEntity>> GetCouriers()
         {
             var result = await _courierRepository.GetCouriers();
             return result;

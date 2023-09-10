@@ -1,5 +1,6 @@
 using CourierServiceDotnet.Services.Courier.Domain;
 using CourierServiceDotnet.Services.Courier.ServiceLibrary.DTO;
+using CourierServiceDotnet.Services.Courier.ServiceLibrary.Mappers;
 
 namespace CourierServiceDotnet.Services.Courier.ServiceLibrary
 {
@@ -11,10 +12,11 @@ namespace CourierServiceDotnet.Services.Courier.ServiceLibrary
         {
             _courierService = courierService;
         }
-        public async Task<IEnumerable<CourierDTO>> GetCouriers()
+        public async Task<List<CourierDTO>> GetCouriers()
         {
-            var result = new List<CourierDTO>() { new CourierDTO(1, 30) };
-            return result;
+            var result = await _courierService.GetCouriers();
+            var resultMapped = Mapper.Map(result);
+            return resultMapped;
         }
     }
 }

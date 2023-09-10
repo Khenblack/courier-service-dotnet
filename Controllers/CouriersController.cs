@@ -14,7 +14,8 @@ namespace CourierServiceDotnet.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCouriers()
         {
-            return Ok("IT Works");
+            var result = await _courierServiceLibrary.GetCouriers();
+            return Ok(result);
         }
 
     }

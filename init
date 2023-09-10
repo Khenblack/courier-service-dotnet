@@ -1,8 +1,0 @@
-CREATE DATABASE CouriersDB
-GO
- 
-USE CouriersDB
-GO
- 
-CREATE SCHEMA CouriersSchema
-GO

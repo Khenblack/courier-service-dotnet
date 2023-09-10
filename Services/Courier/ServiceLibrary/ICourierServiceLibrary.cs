@@ -4,7 +4,7 @@ namespace CourierServiceDotnet.Services.Courier.ServiceLibrary
 {
     public interface ICourierServiceLibrary
     {
-        public Task<IEnumerable<CourierDTO>> GetCouriers();
+        public Task<List<CourierDTO>> GetCouriers();
     }
 
 }

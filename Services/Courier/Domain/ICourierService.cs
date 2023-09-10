@@ -6,7 +6,7 @@ namespace CourierServiceDotnet.Services.Courier.Domain
 {
     public interface ICourierService
     {
-        public Task<IEnumerable<CourierEntity>> GetCouriers();
+        public Task<List<CourierEntity>> GetCouriers();
     }
 
 }

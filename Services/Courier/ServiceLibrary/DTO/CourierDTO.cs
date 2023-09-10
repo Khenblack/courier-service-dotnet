@@ -2,8 +2,8 @@ namespace CourierServiceDotnet.Services.Courier.ServiceLibrary.DTO
 {
     public class CourierDTO
     {
-        int Id { get; set; }
-        int Capacity { get; set; }
+        public int Id { get; set; }
+        public int Capacity { get; set; }
 
         public CourierDTO(int id, int capacity)
         {
