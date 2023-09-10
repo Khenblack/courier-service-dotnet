@@ -1,4 +1,5 @@
-using CoutierServiceDotnet.Swagger;
+using CourierServiceDotnet.DIContainer;
+using CourierServiceDotnet.Swagger;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 
@@ -30,6 +31,8 @@ internal class Program
             });
 
         builder.Services.AddCustomSwagger();
+
+        builder.Services.RegisterAppDependencies();
 
         var app = builder.Build();
 

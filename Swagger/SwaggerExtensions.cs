@@ -1,7 +1,7 @@
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
-namespace CoutierServiceDotnet.Swagger
+namespace CourierServiceDotnet.Swagger
 {
     public static class SwaggerExtensions
     {
