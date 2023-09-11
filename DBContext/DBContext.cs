@@ -1,4 +1,6 @@
+using CourierServiceDotnet.Services.Authentication.Infrastructure.DBEntities;
 using CourierServiceDotnet.Services.Courier.Infrastructure.Entities;
+using CourierServiceDotnet.Services.User.Infrastructure.DBEntities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CourierServiceDotnet.DBContext
@@ -24,6 +26,17 @@ namespace CourierServiceDotnet.DBContext
         {
             modelBuilder.HasDefaultSchema("CouriersSchema");
             modelBuilder.Entity<CourierDB>();
+            modelBuilder.Entity<UserDB>();
+            modelBuilder.Entity<AuthDB>(entity =>
+            {
+                entity.HasKey(c => c.UserId);
+                entity.Property(c => c.UserId).IsRequired();
+
+                entity.HasOne<UserDB>().WithOne().HasForeignKey<AuthDB>("FK_Auth_User");
+            });
+
+            // .HasOne(p => p.Person).WithOne().HasForeignKey<ProspectDto>(p => p.ID)
+            // modelBuilder.Entity<AuthDB>();
             // .HasBaseType<User>();
         }
     }

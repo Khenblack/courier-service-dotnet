@@ -1,3 +1,4 @@
+using CourierServiceDotnet;
 using CourierServiceDotnet.DIContainer;
 using CourierServiceDotnet.Swagger;
 using Microsoft.AspNetCore.Mvc;
@@ -31,6 +32,15 @@ internal class Program
             });
 
         builder.Services.AddCustomSwagger();
+
+        IConfiguration configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json")
+            .Build();
+
+        var appConfiguration = new AppConfiguration();
+
+        configuration.GetSection("AppSettings").Bind(appConfiguration);
 
         builder.Services.RegisterAppDependencies();
 
