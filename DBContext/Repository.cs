@@ -17,10 +17,10 @@ namespace CourierServiceDotnet.DBContext
             return await _dbContext.SaveChangesAsync() > 0;
         }
 
-        public T Add(T entity)
+        public async Task<T> Add(T entity)
         {
             var set = _dbContext.Set<T>();
-            set.Add(entity);
+            await set.AddAsync(entity);
             return entity;
         }
 

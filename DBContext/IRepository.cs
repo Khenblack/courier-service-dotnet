@@ -6,7 +6,7 @@ namespace CourierServiceDotnet.DBContext
     {
         Task<T?> Get(Expression<Func<T, bool>> predicate);
         Task<bool> SaveChanges();
-        T Add(T entity);
+        Task<T> Add(T entity);
         void Remove(T entity);
         void Update(T entity);
         IQueryable<T> Query();

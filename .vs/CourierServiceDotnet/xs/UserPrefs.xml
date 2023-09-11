@@ -1,0 +1,36 @@
+﻿<Properties StartupConfiguration="{2F389095-3D81-483D-AC0C-A80C3F1A012E}|https">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Services/Courier/Domain/CourierService.cs">
+    <Files>
+      <File FileName="Services/Courier/ServiceLibrary/CourierServiceLibrary.cs" Line="13" Column="2" />
+      <File FileName="Services/Courier/Domain/CourierService.cs" Line="5" Column="40" />
+      <File FileName="Services/Courier/Domain/ICourierService.cs" Line="9" Column="40" />
+      <File FileName="Services/Courier/Domain/Entities/Courier2.cs" Line="4" Column="22" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="CourierServiceDotnet">
+            <Node name="CourierServiceDotnet">
+              <Node name="Services" expanded="True">
+                <Node name="Courier">
+                  <Node name="Domain">
+                    <Node name="Entities" expanded="True" />
+                    <Node name="CourierService.cs" selected="True" />
+                  </Node>
+                  <Node name="ServiceLibrary" expanded="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.CourierServiceDotnet PreferredExecutionTarget="/Applications/Brave Browser.app" />
+  <MultiItemStartupConfigurations />
+</Properties>
