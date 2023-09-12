@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace CourierServiceDotnet.Controllers.Users.DTO
+namespace CourierServiceDotnet.Controllers.User.DTO
 {
     public partial class UserRegistrationRequestDTO
     {

@@ -52,5 +52,20 @@ namespace CourierServiceDotnet.Services.User.Domain
             }
 
         }
+
+        public async Task<LoginResult> ValidatePassword(string email, string password)
+        {
+            var user = await _userRepository.GetSingleUserFiltered(new UserFilterRequestDTO { Email = email });
+            if (user == null) return new LoginResult(false, LoginErrorResult.USER_NOT_FOUND);
+            var res = await _authenticationServiceLibrary.ValidateCredentials(user.Id, password);
+            if (res)
+            {
+                return new LoginResult(true);
+            }
+            else
+            {
+                return new LoginResult(false, LoginErrorResult.PASSWORD_DOESNOT_MATCH);
+            }
+        }
     }
 }

@@ -9,5 +9,7 @@ namespace CourierServiceDotnet.Services.User.ServiceLibrary.Contracts
         Task<UserDTO?> GetUserByEmail(string email);
 
         Task<UserDTO> RegisterUser(UserRegisterRequestDTO request);
+
+        Task<LoginResultDTO> LogIn(string email, string password);
     }
 }

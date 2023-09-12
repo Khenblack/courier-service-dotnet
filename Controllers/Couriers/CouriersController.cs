@@ -1,8 +1,10 @@
 using CourierServiceDotnet.Services.Courier.ServiceLibrary;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CourierServiceDotnet.Controllers
 {
+    [Authorize]
     public class CouriersController : BaseConotroller
     {
         private readonly ICourierServiceLibrary _courierServiceLibrary;

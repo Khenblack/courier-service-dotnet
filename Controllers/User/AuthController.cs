@@ -1,21 +1,27 @@
 
-using CourierServiceDotnet.Controllers.Users.DTO;
+using CourierServiceDotnet.Controllers.User.DTO;
+using CourierServiceDotnet.Services.Token.ServiceLibrary.Contracts;
 using CourierServiceDotnet.Services.User.Domain.Exceptions;
 using CourierServiceDotnet.Services.User.ServiceLibrary.Contracts;
 using CourierServiceDotnet.Services.User.ServiceLibrary.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CourierServiceDotnet.Controllers.Users
+namespace CourierServiceDotnet.Controllers.User
 {
-    public class UsersController : BaseConotroller
+    [Authorize]
+    public class UserController : BaseConotroller
     {
         private readonly IUserServiceLibrary _userServiceLibrary;
-        public UsersController(IUserServiceLibrary userServiceLibrary)
+        private readonly ITokenService _tokenService;
+        public UserController(IUserServiceLibrary userServiceLibrary, ITokenService tokenService)
         {
             _userServiceLibrary = userServiceLibrary;
+            _tokenService = tokenService;
         }
 
-        [HttpPost]
+        [HttpPost("register")]
+        [AllowAnonymous]
         public async Task<IActionResult> RegisterUser([FromBody] UserRegistrationRequestDTO request)
         {
             try
@@ -35,6 +41,21 @@ namespace CourierServiceDotnet.Controllers.Users
                 return StatusCode(500, new { message = e.Message });
             }
 
+        }
+
+        [HttpPost("login")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login([FromBody] UserLoginRequestDTO userLoginRequestDTO)
+        {
+            var user = await _userServiceLibrary.GetUserByEmail(userLoginRequestDTO.Email);
+            if (user == null) return StatusCode(404, new { message = "User not found" });
+            var loginResponse = await _userServiceLibrary.LogIn(userLoginRequestDTO.Email, userLoginRequestDTO.Password);
+            var token = loginResponse.Valid ? _tokenService.CreateToken(user.Id) : null;
+
+            if (loginResponse.Valid)
+                return StatusCode(200, new { token });
+
+            return StatusCode(400, new { message = "Invalid credentials" });
         }
 
     }

@@ -9,6 +9,8 @@ using CourierServiceDotnet.Services.Courier.Domain.InfrastructureContracts;
 using CourierServiceDotnet.Services.Courier.Infrastructure;
 using CourierServiceDotnet.Services.Courier.ServiceLibrary;
 using CourierServiceDotnet.Services.Domain.Contracts;
+using CourierServiceDotnet.Services.Token.ServiceLibrary.Contracts;
+using CourierServiceDotnet.Services.Token.ServiceLibrary.Implementations;
 using CourierServiceDotnet.Services.User.Domain;
 using CourierServiceDotnet.Services.User.Domain.InfrastructureContracts;
 using CourierServiceDotnet.Services.User.Infrastructure;
@@ -34,6 +36,7 @@ namespace CourierServiceDotnet.DIContainer
 
             services.AddDbContext<DataBaseContext>(ServiceLifetime.Transient);
 
+            services.AddTransient<ITokenService, TokenService>();
             services.AddTransient<ICourierRepository, CourierRepository>();
             services.AddTransient<ICourierService, CourierService>();
             services.AddTransient<ICourierServiceLibrary, CourierServiceLibrary>();

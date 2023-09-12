@@ -10,5 +10,7 @@ namespace CourierServiceDotnet.Services.User.Domain
         Task<UserEntity?> GetUserByEmail(string email);
 
         Task<UserEntity> RegisterUser(RegisterUserRequest request);
+
+        Task<LoginResult> ValidatePassword(string email, string password);
     }
 }

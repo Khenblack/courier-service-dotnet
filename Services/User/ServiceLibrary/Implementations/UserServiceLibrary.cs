@@ -36,5 +36,13 @@ namespace CourierServiceDotnet.Services.User.ServiceLibrary.Implementations
             var resultMapped = EntityMapper.Map(createdUser);
             return resultMapped;
         }
+
+        public async Task<LoginResultDTO> LogIn(string email, string password)
+        {
+            //TODO: validate email and password
+            var result = await _userService.ValidatePassword(email, password);
+            var resultMapped = LoginResponseMapper.Map(result);
+            return resultMapped;
+        }
     }
 }
