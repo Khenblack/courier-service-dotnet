@@ -12,11 +12,19 @@ namespace CourierServiceDotnet.Services.Courier.ServiceLibrary
         {
             _courierService = courierService;
         }
+
         public async Task<List<CourierDTO>> GetCouriers()
         {
             var result = await _courierService.GetCouriers();
             var resultMapped = Mapper.Map(result);
             return resultMapped;
+        }
+
+        public async Task<CourierDTO> CreateCourier(CreateCourierRequestDTO request)
+        {
+            var courier = await _courierService.CreateCourier(request.Name, request.Capacity);
+            var courierDTO = Mapper.Map(courier);
+            return courierDTO;
         }
     }
 }

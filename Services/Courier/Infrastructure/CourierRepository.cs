@@ -12,6 +12,15 @@ namespace CourierServiceDotnet.Services.Courier.Infrastructure
         {
         }
 
+        public async Task<CourierEntity> CreateCourier(string name, int capacity)
+        {
+            var result = new CourierDB(0, capacity, name);
+            await Add(result);
+            await SaveChanges();
+            var resultMapped = EntityMapper.Map(result);
+            return resultMapped;
+        }
+
         public async Task<List<CourierEntity>> GetCouriers()
         {
             var result = await GetAll();

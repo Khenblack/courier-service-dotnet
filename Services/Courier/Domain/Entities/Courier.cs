@@ -5,10 +5,13 @@
         public int Id { get; set; }
         public int Capacity { get; set; }
 
-        public CourierEntity(int id, int capacity)
+        public string Name { get; set; }
+
+        public CourierEntity(int id, int capacity, string name)
         {
             this.Id = id;
             this.Capacity = capacity;
+            this.Name = name;
         }
     }
 }

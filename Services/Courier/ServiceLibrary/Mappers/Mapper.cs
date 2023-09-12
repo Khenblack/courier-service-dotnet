@@ -7,7 +7,7 @@ namespace CourierServiceDotnet.Services.Courier.ServiceLibrary.Mappers
     {
         public static CourierDTO Map(CourierEntity courier)
         {
-            var entityMapped = new CourierDTO(courier.Id, courier.Capacity);
+            var entityMapped = new CourierDTO(courier.Id, courier.Capacity, courier.Name);
             return entityMapped;
         }
         public static List<CourierDTO> Map(List<CourierEntity> couriers)
