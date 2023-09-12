@@ -1,4 +1,7 @@
-Startup
-docker-compose up -d
+Startup:
 
-dotnet ef database update
+Run command:
+`docker-compose up -d && dotnet ef database update`
+
+Run application:
+`dotnet run`
