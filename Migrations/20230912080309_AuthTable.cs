@@ -5,7 +5,7 @@
 namespace CourierServiceDotnet.Migrations
 {
     /// <inheritdoc />
-    public partial class AuthTableMigration : Migration
+    public partial class AuthTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,30 +15,21 @@ namespace CourierServiceDotnet.Migrations
                 schema: "CouriersSchema",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     PasswordHash = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    PasswordSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    FK_Auth_User = table.Column<int>(type: "int", nullable: true)
+                    PasswordSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Auth", x => x.UserId);
                     table.ForeignKey(
-                        name: "FK_Auth_User_FK_Auth_User",
-                        column: x => x.FK_Auth_User,
+                        name: "FK_Auth_User_UserId",
+                        column: x => x.UserId,
                         principalSchema: "CouriersSchema",
                         principalTable: "User",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Auth_FK_Auth_User",
-                schema: "CouriersSchema",
-                table: "Auth",
-                column: "FK_Auth_User",
-                unique: true,
-                filter: "[FK_Auth_User] IS NOT NULL");
         }
 
         /// <inheritdoc />

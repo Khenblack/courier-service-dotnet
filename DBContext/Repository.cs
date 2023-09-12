@@ -8,7 +8,7 @@ namespace CourierServiceDotnet.DBContext
     public abstract class RepositoryBase<T> : IRepository<T>
      where T : class
     {
-        private readonly DataBaseContext _dbContext;
+        protected readonly DataBaseContext _dbContext;
         public RepositoryBase(DataBaseContext dbContext)
         {
             _dbContext = dbContext;
@@ -16,10 +16,19 @@ namespace CourierServiceDotnet.DBContext
 
         public async Task<bool> SaveChanges()
         {
-            return await _dbContext.SaveChangesAsync() > 0;
+            try
+            {
+                return await _dbContext.SaveChangesAsync() > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error {0}", ex.Message);
+                throw;
+            }
+
         }
 
-        public async Task<T> Add(T entity)
+        public virtual async Task<T> Add(T entity)
         {
             var set = _dbContext.Set<T>();
             await set.AddAsync(entity);

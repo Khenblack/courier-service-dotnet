@@ -5,7 +5,7 @@
 namespace CourierServiceDotnet.Migrations
 {
     /// <inheritdoc />
-    public partial class UserTableMigration : Migration
+    public partial class UserTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

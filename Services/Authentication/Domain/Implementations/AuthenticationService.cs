@@ -16,11 +16,11 @@ namespace CourierServiceDotnet.Services.Authentication.Domain.Implementations
             _authRepository = authRepository;
         }
 
-        public Task<Auth> CreateAuth(int userId, string password, string appPasswordKey)
+        public async Task<Auth> CreateAuth(int userId, string password, string appPasswordKey)
         {
             var passwordSalt = GeneratePasswordSalt();
             var passwordHash = GetPasswordHash(password, passwordSalt, appPasswordKey);
-            var result = _authRepository.CreateAuth(userId, passwordHash, passwordSalt);
+            var result = await _authRepository.CreateAuth(userId, passwordHash, passwordSalt);
             return result;
 
         }

@@ -21,6 +21,7 @@ namespace CourierServiceDotnet.Services.Authentication.Infrastructure
         {
             var res = new AuthDB(userId, passwordHash, passwordSalt);
             await Add(res);
+            _dbContext.ChangeTracker.DetectChanges();
             await SaveChanges();
             var resultMapped = EntityMapper.Map(res);
             return resultMapped;

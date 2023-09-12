@@ -6,7 +6,7 @@ namespace CourierServiceDotnet.Services.Authentication.Infrastructure.DBEntities
     [Table("Auth")]
     public class AuthDB
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int UserId { get; set; }
         [Required]
         public byte[] PasswordHash { get; set; }

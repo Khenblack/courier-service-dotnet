@@ -30,9 +30,7 @@ namespace CourierServiceDotnet.DBContext
             modelBuilder.Entity<AuthDB>(entity =>
             {
                 entity.HasKey(c => c.UserId);
-                entity.Property(c => c.UserId).IsRequired();
-
-                entity.HasOne<UserDB>().WithOne().HasForeignKey<AuthDB>("FK_Auth_User");
+                entity.HasOne<UserDB>().WithOne().HasForeignKey<AuthDB>(w => w.UserId);
             });
         }
     }
