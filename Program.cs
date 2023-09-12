@@ -1,8 +1,11 @@
+using System.Text;
 using CourierServiceDotnet;
 using CourierServiceDotnet.DIContainer;
 using CourierServiceDotnet.Swagger;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.IdentityModel.Tokens;
 
 internal class Program
 {
@@ -34,14 +37,25 @@ internal class Program
         builder.Services.AddCustomSwagger();
 
         IConfiguration configuration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json")
-            .Build();
+        .SetBasePath(Directory.GetCurrentDirectory())
+        .AddJsonFile("appsettings.json")
+        .Build();
 
         var appConfiguration = new AppConfiguration();
-
         configuration.GetSection("AppSettings").Bind(appConfiguration);
         builder.Services.AddSingleton<AppConfiguration>(appConfiguration);
+
+        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(appConfiguration.TokenKey)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
 
         builder.Services.RegisterAppDependencies();
 

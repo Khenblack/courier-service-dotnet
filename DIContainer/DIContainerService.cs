@@ -26,14 +26,6 @@ namespace CourierServiceDotnet.DIContainer
     {
         public static void RegisterAppDependencies(this IServiceCollection services)
         {
-            IConfiguration configuration = new ConfigurationBuilder()
-           .SetBasePath(Directory.GetCurrentDirectory())
-           .AddJsonFile("appsettings.json")
-           .Build();
-
-            var appConfiguration = new AppConfiguration();
-            configuration.GetSection("AppSettings").Bind(appConfiguration);
-
             services.AddDbContext<DataBaseContext>(ServiceLifetime.Transient);
 
             services.AddTransient<ITokenService, TokenService>();
