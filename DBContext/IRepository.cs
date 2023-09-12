@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace CourierServiceDotnet.DBContext
 {
@@ -12,6 +13,8 @@ namespace CourierServiceDotnet.DBContext
         IQueryable<T> Query();
         Task<List<T>> GetAll();
         Task<IEnumerable<T>> GetAll(Expression<Func<T, bool>> predicate);
+        Task<IDbContextTransaction> Transaction();
+        IExecutionStrategy CreateExecutionStrategy();
     }
 
 

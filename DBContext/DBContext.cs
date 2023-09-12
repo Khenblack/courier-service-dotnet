@@ -34,10 +34,6 @@ namespace CourierServiceDotnet.DBContext
 
                 entity.HasOne<UserDB>().WithOne().HasForeignKey<AuthDB>("FK_Auth_User");
             });
-
-            // .HasOne(p => p.Person).WithOne().HasForeignKey<ProspectDto>(p => p.ID)
-            // modelBuilder.Entity<AuthDB>();
-            // .HasBaseType<User>();
         }
     }
 }

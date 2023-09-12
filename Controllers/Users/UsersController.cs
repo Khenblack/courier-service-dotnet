@@ -20,6 +20,7 @@ namespace CourierServiceDotnet.Controllers.Users
         {
             try
             {
+                if (request.Password != request.PasswordConfirm) return StatusCode(400, new { message = "Paswords does not match" });
                 var requestMapped = new UserRegisterRequestDTO(request.FirstName, request.LastName, request.Email, request.Password, true);
                 var createdUser = await _userServiceLibrary.RegisterUser(requestMapped);
                 Response.StatusCode = 201;

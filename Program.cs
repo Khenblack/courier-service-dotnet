@@ -41,6 +41,7 @@ internal class Program
         var appConfiguration = new AppConfiguration();
 
         configuration.GetSection("AppSettings").Bind(appConfiguration);
+        builder.Services.AddSingleton<AppConfiguration>(appConfiguration);
 
         builder.Services.RegisterAppDependencies();
 

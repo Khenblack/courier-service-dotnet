@@ -1,5 +1,7 @@
+using System.Data;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace CourierServiceDotnet.DBContext
 {
@@ -55,6 +57,16 @@ namespace CourierServiceDotnet.DBContext
         public IQueryable<T> Query()
         {
             return _dbContext.Set<T>();
+        }
+
+        public async Task<IDbContextTransaction> Transaction()
+        {
+            return await _dbContext.Database.BeginTransactionAsync();
+        }
+
+        public IExecutionStrategy CreateExecutionStrategy()
+        {
+            return _dbContext.Database.CreateExecutionStrategy();
         }
     }
 

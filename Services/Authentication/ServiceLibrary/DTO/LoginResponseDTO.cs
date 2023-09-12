@@ -3,7 +3,6 @@ namespace CourierServiceDotnet.Services.Authentication.ServiceLibrary.DTO
 {
     public enum ReasonEnumDTO
     {
-        USER_NOT_FOUND,
         INVALID_PASSWORD
     }
     public class LoginResponseDTO
