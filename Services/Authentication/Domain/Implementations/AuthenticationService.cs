@@ -25,9 +25,14 @@ namespace CourierServiceDotnet.Services.Authentication.Domain.Implementations
 
         }
 
-        public Task<LoginResponseDTO> Login(int userId, string password)
+        public async Task<bool> ValidateCredentials(int userId, string password, string appPasswordKey)
         {
-            throw new NotImplementedException();
+            var userAuth = await _authRepository.GetAuthByUser(userId);
+            if (userAuth == null) return false;
+
+            var passwordHash = GetPasswordHash(password, userAuth.PasswordSalt, appPasswordKey);
+
+            return passwordHash.SequenceEqual(userAuth.PasswordHash);
         }
 
         private byte[] GeneratePasswordSalt()

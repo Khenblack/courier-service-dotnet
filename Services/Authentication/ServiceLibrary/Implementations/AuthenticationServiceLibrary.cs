@@ -21,5 +21,11 @@ namespace CourierServiceDotnet.Services.Authentication.ServiceLibrary.Implementa
             var resultMapped = EntityMapper.Map(result);
             return resultMapped;
         }
+
+        public async Task<bool> ValidateCredentials(int userId, string password)
+        {
+            var result = await _authenticationService.ValidateCredentials(userId, password, _appConfiguration.PasswordKey);
+            return result;
+        }
     }
 }
