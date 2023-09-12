@@ -10,11 +10,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace CourierServiceDotnet.Controllers.User
 {
     [Authorize]
-    public class UserController : BaseConotroller
+    public class UserController : BaseController
     {
         private readonly IUserServiceLibrary _userServiceLibrary;
         private readonly ITokenService _tokenService;
-        public UserController(IUserServiceLibrary userServiceLibrary, ITokenService tokenService)
+        public UserController(IUserServiceLibrary userServiceLibrary, ITokenService tokenService) : base(userServiceLibrary)
         {
             _userServiceLibrary = userServiceLibrary;
             _tokenService = tokenService;
