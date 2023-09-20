@@ -1,7 +1,9 @@
+using CourierServiceDotnet.Services.Token.ServiceLibrary.Contracts.DTO;
+
 namespace CourierServiceDotnet.Services.Token.ServiceLibrary.Contracts
 {
     public interface ITokenService
     {
-        string CreateToken(int userId);
+        TokenDTO CreateToken(int userId);
     }
 }

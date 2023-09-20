@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using CourierServiceDotnet.Services.Token.ServiceLibrary.Contracts;
+using CourierServiceDotnet.Services.Token.ServiceLibrary.Contracts.DTO;
 using Microsoft.IdentityModel.Tokens;
 
 namespace CourierServiceDotnet.Services.Token.ServiceLibrary.Implementations
@@ -17,7 +18,7 @@ namespace CourierServiceDotnet.Services.Token.ServiceLibrary.Implementations
         {
             _appConfiguration = appConfiguration;
         }
-        public string CreateToken(int userId)
+        public TokenDTO CreateToken(int userId)
         {
             Claim[] claims = new Claim[] { new Claim("userId", userId.ToString()) };
 
@@ -34,7 +35,9 @@ namespace CourierServiceDotnet.Services.Token.ServiceLibrary.Implementations
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
 
             SecurityToken token = tokenHandler.CreateToken(descriptor);
-            return tokenHandler.WriteToken(token);
+
+            var tokenDto = new TokenDTO(tokenHandler.WriteToken(token));
+            return tokenDto;
         }
     }
 }

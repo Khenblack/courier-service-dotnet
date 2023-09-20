@@ -1,6 +1,7 @@
 
 using CourierServiceDotnet.Controllers.User.DTO;
 using CourierServiceDotnet.Services.Token.ServiceLibrary.Contracts;
+using CourierServiceDotnet.Services.Token.ServiceLibrary.Contracts.DTO;
 using CourierServiceDotnet.Services.User.Domain.Exceptions;
 using CourierServiceDotnet.Services.User.ServiceLibrary.Contracts;
 using CourierServiceDotnet.Services.User.ServiceLibrary.DTO;
@@ -45,17 +46,27 @@ namespace CourierServiceDotnet.Controllers.User
 
         [HttpPost("login")]
         [AllowAnonymous]
-        public async Task<IActionResult> Login([FromBody] UserLoginRequestDTO userLoginRequestDTO)
+        public async Task<ActionResult<TokenDTO>> Login([FromBody] UserLoginRequestDTO userLoginRequestDTO)
         {
             var user = await _userServiceLibrary.GetUserByEmail(userLoginRequestDTO.Email);
-            if (user == null) return StatusCode(404, new { message = "User not found" });
+            if (user == null) return NotFound(new { message = "User not found" });
             var loginResponse = await _userServiceLibrary.LogIn(userLoginRequestDTO.Email, userLoginRequestDTO.Password);
+            if (!loginResponse.Valid)
+            {
+                switch (loginResponse.Reason)
+                {
+                    case LoginErrorResultDTO.USER_NOT_FOUND:
+                        return NotFound(new { message = "User not found" });
+                    case LoginErrorResultDTO.PASSWORD_DOESNOT_MATCH:
+                        return BadRequest(new { message = "Invalid credentials" });
+                    default:
+                        return StatusCode(500, new { message = "Internal server error" });
+                }
+            }
+
             var token = loginResponse.Valid ? _tokenService.CreateToken(user.Id) : null;
 
-            if (loginResponse.Valid)
-                return StatusCode(200, new { token });
-
-            return StatusCode(400, new { message = "Invalid credentials" });
+            return Ok(token);
         }
 
     }
