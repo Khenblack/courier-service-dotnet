@@ -17,7 +17,7 @@ namespace CourierServiceDotnet.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetCouriers()
+        public async Task<ActionResult<List<CourierDTO>>> GetCouriers()
         {
             var userLogged = await getUserFromAuth();
             if (userLogged != null) Console.WriteLine("User logged is {0}", userLogged.FullName);
@@ -26,7 +26,7 @@ namespace CourierServiceDotnet.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateCourier([FromBody] CreateCourierRequest request)
+        public async Task<ActionResult<CourierDTO>> CreateCourier([FromBody] CreateCourierRequest request)
         {
             var userLogged = await getUserFromAuth();
             if (userLogged != null) Console.WriteLine("User logged is {0}", userLogged.FullName);

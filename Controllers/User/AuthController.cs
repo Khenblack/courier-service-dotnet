@@ -22,7 +22,7 @@ namespace CourierServiceDotnet.Controllers.User
 
         [HttpPost("register")]
         [AllowAnonymous]
-        public async Task<IActionResult> RegisterUser([FromBody] UserRegistrationRequestDTO request)
+        public async Task<ActionResult<UserDTO>> RegisterUser([FromBody] UserRegistrationRequestDTO request)
         {
             try
             {
